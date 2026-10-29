@@ -20,4 +20,4 @@ select
 	-- "error",
 	-- error_message
 from '../data/raw/raw_job_postings_*.parquet'
-where error is NULL;
+where error is NULL
