@@ -19,5 +19,9 @@ select
 	-- search_location,
 	-- "error",
 	-- error_message
-from '../data/raw/raw_job_postings_*.parquet'
-where error is NULL
+-- from '../data/raw/raw_job_postings_*.parquet'
+from
+	-- Changed to ref in yaml file by removing hardcoded path
+	{{ source('raw', 'job_postings') }}
+where
+	error is NULL

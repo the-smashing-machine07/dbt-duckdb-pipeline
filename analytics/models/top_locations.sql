@@ -7,3 +7,5 @@ GROUP BY
     job_location
 ORDER BY
     postings DESC
+LIMIT
+    10

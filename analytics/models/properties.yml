@@ -1,0 +1,73 @@
+# Descriptions are important for inspection of the models and columns.
+# Inspection can be done by humans or AI Agents.
+
+sources:
+  - name: raw # Source name
+    description: Raw data for job-postings downloaded from a github repo # Source description
+    tables:
+      - name: job_postings # Table name
+        description: One row per job-posting scrape, raw from the pipeline # Table description
+        config:
+          external_location: '../data/raw/raw_job_postings_*.parquet' # Data location (raw_job_postings)
+
+models:
+  - name: job_postings # Model name
+    description: Cleaned job-postings # Model description
+    # The descriptions will not be automatically included in the metadata in the database.
+    # We need to add a config to ensure the descriptions are included.
+    config:
+      # This tells the dbt to include the description of model and columns in the databse.
+      persist_docs:
+        relation: true
+        columns: true
+    columns:
+      - name: job_id # Column name
+        description: The scraper's posting id; re-scraped postings repeat it. # Column description
+      - name: job_title
+        description: Posting title as scraped; blank on the scraper's error rows.
+      - name: company_name
+        description: Employer name as scraped.
+      - name: job_location
+        description: Posting location as scraped.
+      - name: job_via
+        description: Posting platform as scraped ('via LinkedIn' — the prefix is the scraper's artifact).
+      - name: job_schedule_type
+        description: Schedule as posted; null when the posting didn't say.
+      - name: job_work_from_home
+        description: True when the posting is flagged remote.
+      - name: search_date
+        description: Scrape day.
+      - name: search_term
+        description: Role the scraper searched for.
+
+  - name: jobs_per_month
+    description: Monthly posting counts by role.
+    # The descriptions will not be automatically included in the metadata in the database.
+    # We need to add a config to ensure the descriptions are included.
+    config:
+      # This tells the dbt to include the description of model and columns in the databse.
+      persist_docs:
+        relation: true
+        columns: true
+    columns:
+      - name: month
+        description: Posting month, truncated from search_date.
+      - name: role
+        description: Search role (search_term).
+      - name: postings
+        description: Postings counted for the role that month.
+
+  - name: top_locations
+    description: Top 10 locations by posting count.
+    # The descriptions will not be automatically included in the metadata in the database.
+    # We need to add a config to ensure the descriptions are included.
+    config:
+      # This tells the dbt to include the description of model and columns in the databse.
+      persist_docs:
+        relation: true
+        columns: true
+    columns:
+      - name: job_location
+        description: Posting location; the grain. (2,472 null-location rows exist upstream; the top-10 cut keeps them out.)
+      - name: postings
+        description: Postings counted for the location

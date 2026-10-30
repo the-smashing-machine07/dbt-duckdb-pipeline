@@ -1,10 +1,15 @@
+# This is the name of our project
 name: analytics
 
+# This is the name of our profile, same as project unless specified otherwise
 profile: analytics
+
 
 seed-paths: ["seeds"]
 model-paths: ["models"]
 macro-paths: ["macros"]
+
+# These are the directories that are deleted when we execute 'dbt clean' command
 clean-targets:
   - "target"
   - "dbt_packages"
