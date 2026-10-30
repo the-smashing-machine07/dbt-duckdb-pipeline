@@ -1,0 +1,9 @@
+# Defines the data source
+sources:
+  - name: raw # Source name
+    description: Raw data for job-postings downloaded from a github repo # Source description
+    tables:
+      - name: job_postings # Table name
+        description: One row per job-posting scrape, raw from the pipeline # Table description
+        config:
+          external_location: '../data/raw/raw_job_postings_*.parquet' # Data location (raw_job_postings)
