@@ -11,7 +11,10 @@ wheels/
 
 .vscode
 
-# Data Files
+# Data files
 data/
 *.duckdb
 logs/
+
+# dbt-generated files
+.user.yml
