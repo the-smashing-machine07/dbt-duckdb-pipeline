@@ -13,3 +13,9 @@ macro-paths: ["macros"]
 clean-targets:
   - "target"
   - "dbt_packages"
+
+# Project wide making all models as tables in the database
+# Now you need not go to all the models individually and add config to change it to tables
+models:
+  analytics:
+    +materialized: table
