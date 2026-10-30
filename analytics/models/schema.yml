@@ -2,6 +2,8 @@
 # Inspection can be done by humans or AI Agents.
 
 models:
+
+  # Model 1
   - name: job_postings # Model name
     description: Cleaned job-postings # Model description
     # The descriptions will not be automatically included in the metadata in the database.
@@ -31,6 +33,7 @@ models:
       - name: search_term
         description: Role the scraper searched for.
 
+  # Model 2
   - name: jobs_per_month
     description: Monthly posting counts by role.
     # The descriptions will not be automatically included in the metadata in the database.
@@ -48,6 +51,7 @@ models:
       - name: postings
         description: Postings counted for the role that month.
 
+  # Model 3
   - name: top_locations
     description: Top 10 locations by posting count.
     # The descriptions will not be automatically included in the metadata in the database.
@@ -62,3 +66,20 @@ models:
         description: Posting location; the grain. (2,472 null-location rows exist upstream; the top-10 cut keeps them out.)
       - name: postings
         description: Postings counted for the location
+
+  # Model 4
+  - name: monthly_summary
+    description: Monthly summary of job postings; one row per month.
+    config:
+      persist_docs:
+        relation: true
+        columns: true
+    columns:
+      - name: month
+        description: Year and month of the summary.
+      - name: total_postings
+        description: All postings that month (summed from jobs_per_month).
+      - name: remote_postings
+        description: Postings flagged remote that month.
+      - name: pct_remote
+        description: Share of the month's postings flagged remote, percent.
