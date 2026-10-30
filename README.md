@@ -74,14 +74,7 @@ sources:
 
 Raw postings flow through three dbt layers — declared source → cleaned view → insight marts — with tests gating every build:
 
-```mermaid
-graph LR
-    A["raw.job_postings<br/>parquet glob"] --> B["job_postings<br/>view"]
-    B --> C["jobs_per_month<br/>table"]
-    B --> D["top_locations<br/>table"]
-    B --> E["monthly_summary<br/>table"]
-    C --> E
-```
+![dbt dag visual](images/dbt_dag_visual.png)
 
 | Model | Materialization | Grain | Question it answers |
 |---|---|---|---|
