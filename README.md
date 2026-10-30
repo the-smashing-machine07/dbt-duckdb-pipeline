@@ -131,6 +131,20 @@ Because the tests run inside `dbt build`, a failing test stops the run before a 
 
 ---
 
+## 📖 Docs
+
+Docs are generated with `dbt docs generate` and published to GitHub Pages:
+
+**→ [Link to dbt docs](https://the-smashing-machine07.github.io/dbt-duckdb-pipeline/)**
+
+The site shows:
+
+- The full **lineage graph** (sources → models → marts)
+- **Model and column descriptions** from the YAML
+- Which columns carry **tests**
+
+---
+
 ## 💻 Run it yourself
 
 ```bash
